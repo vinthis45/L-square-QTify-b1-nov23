@@ -1,0 +1,10 @@
+.topGrid {
+    display: flex;
+    flex-wrap:wrap;
+    gap: 30px;
+    row-gap: 25px;
+    margin-left: 30px;
+    align-items: flex-start;
+
+}
+
