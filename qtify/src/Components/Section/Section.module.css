@@ -1,32 +1,23 @@
-
-.container{
-    
-    display: block;
-    justify-content: center;
-    width: 100%;
-    height: 536px;
-}
-
-.sectionTop{
+.header {
     display: flex;
-    justify-content: space-between !important;
-    font-family:inherit;
-    text-decoration: solid ;
-    font-size:large;
-    margin-bottom: 15px;
-
+    justify-content: space-between;
+    align-items: baseline;
 }
 
-.collapseBtn{
-    
-    margin-right: 30px;
+.toggleText {
+    cursor: pointer;
     color: var(--color-primary);
-    text-decoration-line: none;
+
 }
 
+.cardsWrapper {
+    margin-top: 18px;
 
-
-.sectionHead{
-    
-    margin-left: 30px;
 }
+
+.wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+

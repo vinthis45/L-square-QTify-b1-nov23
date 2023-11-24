@@ -1,27 +1,51 @@
 import React, { useState } from 'react'
 import styles from './Section.module.css';
-import CardGrid from '../Grid/Grid';
+import { CircularProgress } from '@mui/material';
+// import CardGrid from '../Grid/Grid';
+import MusicCard from "../Card/Card"
+import Carousel from '../Carousel/Carousel';
 
-export default function Section(props) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const handleToggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+
+export default function Section({ title, data, type }) {
+
+  const [carouselToggle, setCarouselToggle] = useState(true);
+
+
+  const handleToggle = () => {
+    setCarouselToggle((prevState) => !prevState);
+
+  }
+
   return (
     <div>
-      <section className={styles.container}>
-        <div className={styles.sectionTop}>
-          <header className={styles.sectionHead}>
-            {props.header}
-          </header>
-          <a href='#' type='button' onClick={handleToggleCollapse} className={styles.collapseBtn}>
-            {isCollapsed ? 'Show All' : 'Collapse'}
-          </a>
+      <div className={styles.header}>
+        <h3>{title}</h3>
+        <h4 className={styles.toggleText} onClick={handleToggle}>
+          {!carouselToggle ? "Collapse" : "Show All"}
+        </h4>
+      </div>
+      {data.length === 0 ? (
+        <CircularProgress />
+      ) : (
+        <div className={styles.cardsWrapper} >
+          {!carouselToggle ? (
+            <div className={styles.wrapper} >
+              {data.map(ele => (
+                <MusicCard data={ele} type={type} />
+              ))}
+            </div>
+          ) : (
+            
+              <Carousel
+                data={data}
+                renderComponent={(data) => <MusicCard data={data} type={type} />}
+              />
+            
+          )}
         </div>
-        <div className={styles.collapsibleSection} style={{ overflow: 'hidden', height: isCollapsed ? '240px' : '536px', transition: 'height 0.5s' }}>
-        <CardGrid />
-        </div>
-      </section>
+
+      )}
+
     </div>
   )
 }
