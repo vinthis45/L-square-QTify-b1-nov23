@@ -12,12 +12,13 @@
 
 .cardsWrapper {
     margin-top: 18px;
-
+    
 }
 
 .wrapper {
     display: flex;
     gap: 40px;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
+    margin-left: 40px;
 }
 

@@ -29,7 +29,7 @@ export default function Section({ title, data, type }) {
       ) : (
         <div className={styles.cardsWrapper} >
           {!carouselToggle ? (
-            <div className={styles.wrapper} >
+            <div className={styles.wrapper}>
               {data.map(ele => (
                 <MusicCard data={ele} type={type} />
               ))}
