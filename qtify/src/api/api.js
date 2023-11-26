@@ -29,6 +29,16 @@ export const fetchSongs = async () => {
     }
 }
 
+export const fetchGenres = async () => {
+    try {
+        const response = await axios.get(`${BACKEND_ENDPOINT}/genres`);
+        console.log(response.data)
+        return response.data.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export const fetchFaqs = async () => {
     try {
         const response = await axios.get(`${BACKEND_ENDPOINT}/faq`);

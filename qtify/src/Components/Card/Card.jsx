@@ -36,10 +36,10 @@ export default function MusicCard({ data, type }) {
                 return (
                     <div className={styles.wrapper}>
                         <div className={styles.card}>
-                            <img src={image} alt="album" loading='lazy' />
+                            <img src={image} alt="song" loading='lazy' />
                             <div className={styles.banner}>
                                 <div className={styles.pills}>
-                                    <p>{likes} Likes</p>
+                                    <Chip label={`${likes} Likes`} size='small' className={styles.pill} />
                                 </div>
                             </div>
                         </div>
