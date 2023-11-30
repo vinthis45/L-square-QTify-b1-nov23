@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Section.module.css';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import MusicCard from "../Card/Card"
 import Carousel from '../Carousel/Carousel';
 import Box from '@mui/material/Box';
@@ -11,16 +11,10 @@ import TabPanel from '@mui/lab/TabPanel';
 
 
 export default function Section({ title, data, genresData, cardType, sectionType }) {
-
   const [carouselToggle, setCarouselToggle] = useState(true);
-  const [value, setValue] = useState('0');
+  const [value, setValue] = useState('all');
 
 
-  useEffect(() => {
-    if (value === null && data && data.length > 0) {
-      setValue('0');
-    }
-  }, [value, data]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -28,19 +22,22 @@ export default function Section({ title, data, genresData, cardType, sectionType
 
   const handleToggle = () => {
     setCarouselToggle((prevState) => !prevState);
+  };
 
-  }
-
-
-  const filterSongData = (e) => {
+  const getFilteredData = () => {
+    if (value === 'all') {
+      return data;
+    }
     const tabLabel = genresData[value]?.label;
     if (!tabLabel) {
       console.warn('Tab label not found');
-      return data; 
+      return data;
     }
-    return data.filter((ele) => ele.genre.key === tabLabel.toLowerCase());
 
-  }
+    return data.filter((ele) => ele.genre.key === tabLabel.toLowerCase());
+  };
+
+
 
   const getSection = (sectionType) => {
     switch (sectionType) {
@@ -79,7 +76,7 @@ export default function Section({ title, data, genresData, cardType, sectionType
         )
       }
       case "songs": {
-        const filteredData = filterSongData();
+        const filteredData = getFilteredData();
         return (
           <>
             <div className={styles.songsHeader}>
@@ -94,15 +91,17 @@ export default function Section({ title, data, genresData, cardType, sectionType
                         }
 
                       }} >
+                        <Tab value="all" label={<Typography style={{ fontSize: "13px", fontWeight: "bold" }} >All</Typography>} >
 
+                        </Tab>
                         {genresData.map((ele, index) => (
-                          <Tab label={ele.label} value={`${index}`} key={ele.key} onClick={filterSongData} />
+                          <Tab label={<Typography style={{ fontSize: "13px", fontWeight: 'bold' }}>{ele.label}</Typography>} value={`${index}`} key={ele.key} />
                         ))}
 
                       </TabList>
                     </Box>
-                    {filteredData.map((ele, index) => (
-                      <TabPanel key={ele.id} value={`${index}`} index={`${index}`}>
+                    {filteredData !== undefined && (
+                      <TabPanel key={value} value={value} index={value}>
                         {filteredData.length === 0 ? (
                           <CircularProgress />
                         ) : (
@@ -112,7 +111,7 @@ export default function Section({ title, data, genresData, cardType, sectionType
                           />
                         )}
                       </TabPanel>
-                    ))}
+                    )}
 
                   </TabContext>
                 </Box>

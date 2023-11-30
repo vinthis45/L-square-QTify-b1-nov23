@@ -22,14 +22,14 @@ export default function App() {
 
 
   }, [])
-  const { topAlbums = [], newAlbums = [], songsData = [], genresData = [] } = data;
+  const { topAlbums = [], newAlbums = [], songsData = [], genresData = []} = data;
 
 
   return (
     <>
       <StyledEngineProvider injectFirst>
         <Navbar />
-        <Outlet context={{ data: { topAlbums, newAlbums, songsData, genresData } }} />
+        <Outlet context={{ data: { topAlbums, newAlbums, songsData, genresData} }} />
 
       </StyledEngineProvider>
     </>
